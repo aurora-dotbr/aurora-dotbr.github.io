@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Smart Home · Solicitar Orçamento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #080810;
+    --surface: #0f0f1a;
+    --surface2: #161625;
+    --surface3: #1e1e32;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.16);
+    --text: #f0f0f8;
+    --text-muted: rgba(240,240,248,0.55);
+    --text-dim: rgba(240,240,248,0.3);
+    --teal: #00d4aa;
+    --teal-dim: rgba(0,212,170,0.1);
+    --teal-border: rgba(0,212,170,0.3);
+    --purple: #8b5cf6;
+    --purple-dim: rgba(139,92,246,0.1);
+    --grad: linear-gradient(135deg, #00d4aa, #8b5cf6);
+    --radius: 12px;
+    --radius-lg: 18px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* LAYOUT */
+  .page {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .sidebar-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,170,0.06) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    pointer-events: none;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 3rem;
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.03em;
+  }
+
+  .logo-text span {
+    display: block;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 1px;
+  }
+
+  .sidebar-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .grad-text {
+    background: linear-gradient(135deg, #00d4aa, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sidebar-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .sidebar-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  .sidebar-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .sidebar-step.active {
+    background: var(--teal-dim);
+    border-color: var(--teal-border);
+  }
+
+  .sidebar-step.done {
+    opacity: 0.5;
+  }
+
+  .step-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .sidebar-step.active .step-dot {
+    background: var(--grad);
+    border-color: transparent;
+    color: #fff;
+  }
+
+  .sidebar-step.done .step-dot {
+    background: var(--teal-dim);
+    border-color: var(--teal-border);
+    color: var(--teal);
+  }
+
+  .step-label {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .sidebar-step.active .step-label {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .sidebar-guarantee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* FORM AREA */
+  .form-area {
+    padding: 3rem 3.5rem;
+    overflow-y: auto;
+  }
+
+  /* PROGRESS */
+  .progress-bar {
+    width: 100%;
+    height: 3px;
+    background: var(--surface2);
+    border-radius: 100px;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--grad);
+    border-radius: 100px;
+    transition: width 0.4s ease;
+  }
+
+  /* STEP PANELS */
+  .step-panel { display: none; }
+  .step-panel.active { display: block; }
+
+  .step-heading {
+    margin-bottom: 2rem;
+  }
+
+  .step-num-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.5rem;
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  /* FORM ELEMENTS */
+  .field { margin-bottom: 1.5rem; }
+
+  label.field-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02em;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    padding: 13px 16px;
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--teal-border);
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--text-dim); }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(240,240,248,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  /* OPTION CARDS */
+  .option-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .option-cards.cols-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .option-card {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .option-card input[type="radio"],
+  .option-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+
+  .option-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .option-card input:checked + .option-card-inner {
+    border-color: var(--teal);
+    background: var(--teal-dim);
+  }
+
+  .option-card-inner:hover {
+    border-color: var(--border-hover);
+  }
+
+  .option-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .option-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .option-card input:checked + .option-card-inner .option-text {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* SECTION DIVIDER */
+  .form-divider {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* CONDITIONAL */
+  .conditional { display: none; }
+  .conditional.visible { display: block; }
+
+  /* NAVIGATION BUTTONS */
+  .form-nav {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--border-hover);
+    color: var(--text-muted);
+    padding: 13px 24px;
+    border-radius: var(--radius);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+
+  .btn-next {
+    flex: 1;
+    background: var(--grad);
+    border: none;
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: var(--radius);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-next:hover { opacity: 0.88; }
+
+  /* SUCCESS */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .success-screen.visible { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; }
+
+  .success-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: var(--teal-dim);
+    border: 1px solid var(--teal-border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px;
+    margin-bottom: 1.5rem;
+  }
+
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .success-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 420px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: opacity 0.2s;
+  }
+
+  .btn-whatsapp:hover { opacity: 0.88; }
+
+  /* RESPONSIVE */
+  @media (max-width: 800px) {
+    .page { grid-template-columns: 1fr; }
+    .sidebar {
+      position: static;
+      height: auto;
+      padding: 2rem 1.5rem;
+    }
+    .sidebar-steps { display: none; }
+    .form-area { padding: 2rem 1.5rem; }
+    .option-cards { grid-template-columns: 1fr; }
+    .option-cards.cols-3 { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .option-cards.cols-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-glow"></div>
+    <a href="index.html" class="logo">
+      <img src="logo-branco.png" alt="Aurora Smart Home" style="height:38px;width:auto;">
+    </a>
+
+    <h2 class="sidebar-title">Solicite seu<br><span class="grad-text">orçamento grátis</span></h2>
+    <p class="sidebar-desc">Responda algumas perguntas rápidas para que eu possa montar uma proposta precisa e sem surpresas para o seu projeto.</p>
+
+    <div class="sidebar-steps" id="sidebarSteps">
+      <div class="sidebar-step active" data-for="1">
+        <div class="step-dot">1</div>
+        <div class="step-label">Seus dados de contato</div>
+      </div>
+      <div class="sidebar-step" data-for="2">
+        <div class="step-dot">2</div>
+        <div class="step-label">Fase e tipo da obra</div>
+      </div>
+      <div class="sidebar-step" data-for="3">
+        <div class="step-dot">3</div>
+        <div class="step-label">Sistemas de iluminação</div>
+      </div>
+      <div class="sidebar-step" data-for="4">
+        <div class="step-dot">4</div>
+        <div class="step-label">Câmeras de segurança</div>
+      </div>
+      <div class="sidebar-step" data-for="5">
+        <div class="step-dot">5</div>
+        <div class="step-label">Som e outros sistemas</div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-guarantee">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Seus dados são usados apenas para o orçamento
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM AREA -->
+  <div class="form-area">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:20%"></div>
+    </div>
+
+    <!-- ETAPA 1: CONTATO -->
+    <div class="step-panel active" id="step1">
+      <div class="step-heading">
+        <p class="step-num-label">Etapa 1 de 5</p>
+        <h2 class="step-title">Como posso te chamar?</h2>
+        <p class="step-desc">Informações básicas para eu conseguir entrar em contato com a sua proposta.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Nome completo *</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
+      </div>
+      <div class="field">
+        <label class="field-label">WhatsApp *</label>
+        <input type="tel" id="whatsapp" placeholder="(11) 99999-9999" required>
+      </div>
+      <div class="field">
+        <label class="field-label">E-mail (opcional)</label>
+        <input type="email" id="email" placeholder="seu@email.com">
+      </div>
+      <div class="field">
+        <label class="field-label">Cidade do imóvel *</label>
+        <input type="text" id="cidade" placeholder="Ex: Atibaia, Mairiporã, Bragança...">
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-next" onclick="nextStep(1)">
+          Próximo — Fase da obra
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ETAPA 2: FASE DA OBRA -->
+    <div class="step-panel" id="step2">
+      <div class="step-heading">
+        <p class="step-num-label">Etapa 2 de 5</p>
+        <h2 class="step-title">Em que fase está o projeto?</h2>
+        <p class="step-desc">Isso define o que é possível instalar e qual é a melhor abordagem técnica.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Fase atual da obra *</label>
+        <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+          <label class="option-card">
+            <input type="radio" name="fase" value="projeto">
+            <div class="option-card-inner">
+              <span class="option-icon">📐</span>
+              <span class="option-text">Projeto / Planejamento<br><small style="opacity:.6">Ainda no papel</small></span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="fase" value="estrutura">
+            <div class="option-card-inner">
+              <span class="option-icon">🧱</span>
+              <span class="option-text">Alvenaria / Estrutura<br><small style="opacity:.6">Paredes em construção</small></span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="fase" value="instalacoes">
+            <div class="option-card-inner">
+              <span class="option-icon">⚡</span>
+              <span class="option-text">Instalações em andamento<br><small style="opacity:.6">Elétrica e hidráulica</small></span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="fase" value="acabamento">
+            <div class="option-card-inner">
+              <span class="option-icon">🪵</span>
+              <span class="option-text">Acabamento<br><small style="opacity:.6">Piso, pintura, marcenaria</small></span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="fase" value="entregue">
+            <div class="option-card-inner">
+              <span class="option-icon">🔑</span>
+              <span class="option-text">Obra entregue<br><small style="opacity:.6">Imóvel pronto ou habitado</small></span>
+            </div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="fase" value="reforma">
+            <div class="option-card-inner">
+              <span class="option-icon">🔨</span>
+              <span class="option-text">Reforma / Retrofit<br><small style="opacity:.6">Atualização de imóvel</small></span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:1rem;">
+        <label class="field-label">Tipo do imóvel *</label>
+        <div class="option-cards cols-3">
+          <label class="option-card">
+            <input type="radio" name="tipo" value="casa">
+            <div class="option-card-inner"><span class="option-icon">🏠</span><span class="option-text">Casa</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="tipo" value="apartamento">
+            <div class="option-card-inner"><span class="option-icon">🏢</span><span class="option-text">Apartamento</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="tipo" value="comercial">
+            <div class="option-card-inner"><span class="option-icon">🏪</span><span class="option-text">Comercial</span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tamanho aproximado (m²)</label>
+        <select id="tamanho">
+          <option value="" disabled selected>Selecione uma faixa</option>
+          <option value="ate100">Até 100 m²</option>
+          <option value="100-200">100 a 200 m²</option>
+          <option value="200-350">200 a 350 m²</option>
+          <option value="350-500">350 a 500 m²</option>
+          <option value="acima500">Acima de 500 m²</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Possui planta baixa ou projeto executivo do imóvel?</label>
+        <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+          <label class="option-card">
+            <input type="radio" name="planta" value="sim_completo" onchange="toggleConditional('planta_aviso', true)">
+            <div class="option-card-inner"><span class="option-icon">📐</span><span class="option-text">Sim, tenho completo<br><small style="opacity:.6">Planta baixa ou executivo</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="planta" value="sim_parcial" onchange="toggleConditional('planta_aviso', true)">
+            <div class="option-card-inner"><span class="option-icon">📄</span><span class="option-text">Tenho parcialmente<br><small style="opacity:.6">Esboço ou planta simples</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="planta" value="em_andamento" onchange="toggleConditional('planta_aviso', false)">
+            <div class="option-card-inner"><span class="option-icon">✏️</span><span class="option-text">Em elaboração<br><small style="opacity:.6">Ainda sendo desenvolvido</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="planta" value="nao" onchange="toggleConditional('planta_aviso', false)">
+            <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não possuo<br><small style="opacity:.6">Sem projeto definido</small></span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="conditional" id="planta_aviso">
+        <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(0,212,170,0.07);border:1px solid rgba(0,212,170,0.25);border-radius:var(--radius);padding:14px 16px;margin-bottom:1rem;">
+          <span style="font-size:18px;flex-shrink:0;">💡</span>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Ótimo! Após enviar este formulário, encaminhe o arquivo da planta (PDF, JPG ou DWG) diretamente pelo WhatsApp. Isso vai agilizar muito a análise e o orçamento.</p>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(2)">← Voltar</button>
+        <button class="btn-next" onclick="nextStep(2)">
+          Próximo — Iluminação
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ETAPA 3: ILUMINAÇÃO -->
+    <div class="step-panel" id="step3">
+      <div class="step-heading">
+        <p class="step-num-label">Etapa 3 de 5</p>
+        <h2 class="step-title">Iluminação inteligente</h2>
+        <p class="step-desc">Controle de iluminação automatizado por cômodo, cenas programadas e integração com assistentes de voz.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tem interesse em automação de iluminação? *</label>
+        <div class="option-cards cols-3">
+          <label class="option-card">
+            <input type="radio" name="iluminacao_interesse" value="sim" onchange="toggleConditional('iluminacao_det', true)">
+            <div class="option-card-inner"><span class="option-icon">✅</span><span class="option-text">Sim, quero</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="iluminacao_interesse" value="talvez" onchange="toggleConditional('iluminacao_det', true)">
+            <div class="option-card-inner"><span class="option-icon">🤔</span><span class="option-text">Talvez</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="iluminacao_interesse" value="nao" onchange="toggleConditional('iluminacao_det', false)">
+            <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não</span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="conditional" id="iluminacao_det">
+        <div class="form-divider">Detalhes da iluminação</div>
+
+        <div class="field">
+          <label class="field-label">Já tem algum sistema de automação definido?</label>
+          <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="elko">
+              <div class="option-card-inner"><span class="option-icon">🔘</span><span class="option-text">Elko / Legrand</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="intelbras">
+              <div class="option-card-inner"><span class="option-icon">🔘</span><span class="option-text">Intelbras</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="somfy">
+              <div class="option-card-inner"><span class="option-icon">🔘</span><span class="option-text">Somfy / Lutron</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="smart">
+              <div class="option-card-inner"><span class="option-icon">🔘</span><span class="option-text">Alexa / Google Home</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="outro">
+              <div class="option-card-inner"><span class="option-icon">🔘</span><span class="option-text">Outro sistema</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="sistema_ilum" value="nenhum">
+              <div class="option-card-inner"><span class="option-icon">❓</span><span class="option-text">Ainda sem definição</span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Quantos ambientes / pontos de controle aproximadamente?</label>
+          <select id="ambientes_ilum">
+            <option value="" disabled selected>Selecione</option>
+            <option value="1-5">1 a 5 ambientes</option>
+            <option value="6-10">6 a 10 ambientes</option>
+            <option value="11-20">11 a 20 ambientes</option>
+            <option value="20+">Mais de 20</option>
+            <option value="nao_sei">Ainda não sei</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Interesse em persianas / cortinas motorizadas?</label>
+          <div class="option-cards cols-3">
+            <label class="option-card">
+              <input type="radio" name="persianas" value="sim">
+              <div class="option-card-inner"><span class="option-icon">🪟</span><span class="option-text">Sim</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="persianas" value="talvez">
+              <div class="option-card-inner"><span class="option-icon">🤔</span><span class="option-text">Talvez</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="persianas" value="nao">
+              <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não</span></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(3)">← Voltar</button>
+        <button class="btn-next" onclick="nextStep(3)">
+          Próximo — Câmeras
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ETAPA 4: CÂMERAS -->
+    <div class="step-panel" id="step4">
+      <div class="step-heading">
+        <p class="step-num-label">Etapa 4 de 5</p>
+        <h2 class="step-title">Câmeras e segurança</h2>
+        <p class="step-desc">Sistema de monitoramento, gravação e acesso remoto pelo celular.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tem interesse em sistema de câmeras? *</label>
+        <div class="option-cards cols-3">
+          <label class="option-card">
+            <input type="radio" name="cameras_interesse" value="sim" onchange="toggleConditional('cameras_det', true)">
+            <div class="option-card-inner"><span class="option-icon">✅</span><span class="option-text">Sim, quero</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="cameras_interesse" value="talvez" onchange="toggleConditional('cameras_det', true)">
+            <div class="option-card-inner"><span class="option-icon">🤔</span><span class="option-text">Talvez</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="cameras_interesse" value="nao" onchange="toggleConditional('cameras_det', false)">
+            <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não</span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="conditional" id="cameras_det">
+        <div class="form-divider">Tipo de sistema</div>
+
+        <div class="field">
+          <label class="field-label">Qual tipo de sistema prefere (ou já tem)?</label>
+          <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+            <label class="option-card">
+              <input type="radio" name="tipo_camera" value="dvr">
+              <div class="option-card-inner"><span class="option-icon">📼</span><span class="option-text">CFTV / DVR<br><small style="opacity:.6">Câmeras analógicas + gravador</small></span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="tipo_camera" value="ip">
+              <div class="option-card-inner"><span class="option-icon">🌐</span><span class="option-text">IP / Wi-Fi<br><small style="opacity:.6">Câmeras conectadas à rede</small></span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="tipo_camera" value="hibrido">
+              <div class="option-card-inner"><span class="option-icon">🔀</span><span class="option-text">Híbrido<br><small style="opacity:.6">Combinação dos dois</small></span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="tipo_camera" value="nao_sei">
+              <div class="option-card-inner"><span class="option-icon">❓</span><span class="option-text">Ainda não sei<br><small style="opacity:.6">Preciso de orientação</small></span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Quantidade aproximada de câmeras</label>
+          <select id="qtd_cameras">
+            <option value="" disabled selected>Selecione</option>
+            <option value="1-4">1 a 4 câmeras</option>
+            <option value="5-8">5 a 8 câmeras</option>
+            <option value="9-16">9 a 16 câmeras</option>
+            <option value="16+">Mais de 16</option>
+            <option value="nao_sei">Ainda não sei</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Precisa de acesso remoto pelo celular?</label>
+          <div class="option-cards cols-3">
+            <label class="option-card">
+              <input type="radio" name="acesso_remoto" value="sim">
+              <div class="option-card-inner"><span class="option-icon">📱</span><span class="option-text">Sim</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="acesso_remoto" value="talvez">
+              <div class="option-card-inner"><span class="option-icon">🤔</span><span class="option-text">Talvez</span></div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="acesso_remoto" value="nao">
+              <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não</span></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(4)">← Voltar</button>
+        <button class="btn-next" onclick="nextStep(4)">
+          Próximo — Som e outros
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ETAPA 5: SOM E OUTROS -->
+    <div class="step-panel" id="step5">
+      <div class="step-heading">
+        <p class="step-num-label">Etapa 5 de 5</p>
+        <h2 class="step-title">Som, rede e outros sistemas</h2>
+        <p class="step-desc">Última etapa — me conta sobre os demais sistemas que você tem interesse.</p>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Interesse em sistema de som? *</label>
+        <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+          <label class="option-card">
+            <input type="radio" name="som_interesse" value="home_theater" onchange="toggleConditional('som_det', true)">
+            <div class="option-card-inner"><span class="option-icon">🎬</span><span class="option-text">Home Theater<br><small style="opacity:.6">Sala de cinema</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="som_interesse" value="ambiente" onchange="toggleConditional('som_det', true)">
+            <div class="option-card-inner"><span class="option-icon">🔊</span><span class="option-text">Som Ambiente<br><small style="opacity:.6">Múltiplos ambientes</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="som_interesse" value="ambos" onchange="toggleConditional('som_det', true)">
+            <div class="option-card-inner"><span class="option-icon">🎵</span><span class="option-text">Ambos</span></div>
+          </label>
+          <label class="option-card">
+            <input type="radio" name="som_interesse" value="nao" onchange="toggleConditional('som_det', false)">
+            <div class="option-card-inner"><span class="option-icon">❌</span><span class="option-text">Não tenho interesse</span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="conditional" id="som_det">
+        <div class="field" style="margin-top:1rem;">
+          <label class="field-label">Quantos ambientes de som aproximadamente?</label>
+          <select id="ambientes_som">
+            <option value="" disabled selected>Selecione</option>
+            <option value="1">Apenas 1 (home theater)</option>
+            <option value="2-4">2 a 4 ambientes</option>
+            <option value="5-8">5 a 8 ambientes</option>
+            <option value="casa_toda">Casa toda</option>
+            <option value="nao_sei">Ainda não sei</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-divider">Outros sistemas de interesse</div>
+
+      <div class="field">
+        <label class="field-label">Marque todos que tiver interesse (pode marcar vários)</label>
+        <div class="option-cards" style="grid-template-columns:1fr 1fr;">
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="wifi">
+            <div class="option-card-inner"><span class="option-icon">📡</span><span class="option-text">Rede Wi-Fi estruturada<br><small style="opacity:.6">Sem pontos cegos</small></span></div>
+          </label>
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="fechadura">
+            <div class="option-card-inner"><span class="option-icon">🔐</span><span class="option-text">Fechaduras inteligentes</span></div>
+          </label>
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="ar">
+            <div class="option-card-inner"><span class="option-icon">❄️</span><span class="option-text">Automação de ar-condicionado</span></div>
+          </label>
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="interfone">
+            <div class="option-card-inner"><span class="option-icon">🔔</span><span class="option-text">Interfone / Video porteiro</span></div>
+          </label>
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="alarme">
+            <div class="option-card-inner"><span class="option-icon">🚨</span><span class="option-text">Alarme / Sensores</span></div>
+          </label>
+          <label class="option-card">
+            <input type="checkbox" name="extras" value="luminarias">
+            <div class="option-card-inner"><span class="option-icon">💡</span><span class="option-text">Luminárias personalizadas<br><small style="opacity:.6">Design exclusivo RGB</small></span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Alguma informação adicional que queira compartilhar?</label>
+        <textarea id="observacoes" placeholder="Ex: tenho um arquiteto no projeto, preciso de consultoria apenas, já tenho alguns equipamentos..."></textarea>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="prevStep(5)">← Voltar</button>
+        <button class="btn-next" onclick="submitForm()" style="background: linear-gradient(135deg,#25D366,#1ebe5d);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.956-1.358l-.355-.21-3.683.967.984-3.595-.232-.371A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          Enviar e falar pelo WhatsApp
+        </button>
+      </div>
+    </div>
+
+    <!-- SUCESSO -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">✓</div>
+      <h2 class="success-title">Perfeito, <span class="grad-text" id="successNome"></span>!</h2>
+      <p class="success-desc">Recebi suas informações. Vou montar uma proposta personalizada e entrar em contato com você em breve pelo WhatsApp.</p>
+      <a id="whatsappLink" href="#" class="btn-whatsapp" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Confirmar pelo WhatsApp
+      </a>
+    </div>
+
+  </div><!-- /form-area -->
+</div><!-- /page -->
+
+<script>
+  const SEU_NUMERO = '5513981201079';
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  function nextStep(from) {
+    const step = document.getElementById('step' + from);
+    step.classList.remove('active');
+    currentStep = from + 1;
+    document.getElementById('step' + currentStep).classList.add('active');
+    updateProgress();
+    updateSidebar();
+    window.scrollTo(0, 0);
+  }
+
+  function prevStep(from) {
+    document.getElementById('step' + from).classList.remove('active');
+    currentStep = from - 1;
+    document.getElementById('step' + currentStep).classList.add('active');
+    updateProgress();
+    updateSidebar();
+    window.scrollTo(0, 0);
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / totalSteps) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+  }
+
+  function updateSidebar() {
+    document.querySelectorAll('.sidebar-step').forEach(el => {
+      const forStep = parseInt(el.dataset.for);
+      el.classList.remove('active', 'done');
+      if (forStep === currentStep) el.classList.add('active');
+      if (forStep < currentStep) el.classList.add('done');
+    });
+  }
+
+  function toggleConditional(id, show) {
+    const el = document.getElementById(id);
+    if (show) el.classList.add('visible');
+    else el.classList.remove('visible');
+  }
+
+  function getRadioValue(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : 'não informado';
+  }
+
+  function getCheckboxValues(name) {
+    const els = document.querySelectorAll(`input[name="${name}"]:checked`);
+    return els.length ? Array.from(els).map(e => e.value).join(', ') : 'nenhum';
+  }
+
+  const tamanhoLabel = {
+    'ate100': 'Até 100 m²', '100-200': '100 a 200 m²', '200-350': '200 a 350 m²',
+    '350-500': '350 a 500 m²', 'acima500': 'Acima de 500 m²'
+  };
+
+  function submitForm() {
+    const nome = document.getElementById('nome').value || 'Cliente';
+    const whats = document.getElementById('whatsapp').value;
+    const email = document.getElementById('email').value;
+    const cidade = document.getElementById('cidade').value;
+    const tamanhoVal = document.getElementById('tamanho').value;
+    const tamanho = tamanhoLabel[tamanhoVal] || 'não informado';
+    const fase = getRadioValue('fase');
+    const tipo = getRadioValue('tipo');
+    const ilum = getRadioValue('iluminacao_interesse');
+    const sistemaIlum = getRadioValue('sistema_ilum');
+    const ambientesIlum = document.getElementById('ambientes_ilum').value || 'não informado';
+    const persianas = getRadioValue('persianas');
+    const cameras = getRadioValue('cameras_interesse');
+    const tipoCamera = getRadioValue('tipo_camera');
+    const qtdCameras = document.getElementById('qtd_cameras').value || 'não informado';
+    const acessoRemoto = getRadioValue('acesso_remoto');
+    const som = getRadioValue('som_interesse');
+    const ambientesSom = document.getElementById('ambientes_som').value || 'não informado';
+    const extras = getCheckboxValues('extras');
+    const obs = document.getElementById('observacoes').value;
+    const plantaLabel = {
+      'sim_completo': 'Sim, tem planta completa (enviará pelo WhatsApp)',
+      'sim_parcial': 'Tem parcialmente (enviará pelo WhatsApp)',
+      'em_andamento': 'Em elaboração',
+      'nao': 'Não possui'
+    };
+    const plantaVal = getRadioValue('planta');
+    const planta = plantaLabel[plantaVal] || 'não informado';
+
+    const msg = `Olá Augusto! Preenchi o formulário do site da Aurora Smart Home. Seguem minhas informações:
+
+*👤 Contato*
+• Nome: ${nome}
+• WhatsApp: ${whats}${email ? '\n• E-mail: ' + email : ''}
+• Cidade: ${cidade}
+
+*🏠 Imóvel*
+• Tipo: ${tipo}
+• Tamanho: ${tamanho}
+• Fase da obra: ${fase}
+• Planta baixa / projeto: ${planta}
+
+*💡 Iluminação inteligente:* ${ilum}${ilum !== 'nao' ? `
+• Sistema: ${sistemaIlum}
+• Ambientes: ${ambientesIlum}
+• Persianas motorizadas: ${persianas}` : ''}
+
+*📷 Câmeras e segurança:* ${cameras}${cameras !== 'nao' ? `
+• Tipo: ${tipoCamera}
+• Quantidade: ${qtdCameras}
+• Acesso remoto: ${acessoRemoto}` : ''}
+
+*🔊 Som:* ${som}${som !== 'nao' ? `
+• Ambientes: ${ambientesSom}` : ''}
+
+*➕ Outros sistemas:* ${extras}
+
+*📝 Observações:* ${obs || 'nenhuma'}
+
+Aguardo retorno para conversarmos sobre o projeto! 🙂`;
+
+    const url = `https://wa.me/${SEU_NUMERO}?text=${encodeURIComponent(msg)}`;
+
+    document.getElementById('step5').classList.remove('active');
+    document.getElementById('successScreen').classList.add('visible');
+    document.getElementById('successNome').textContent = nome.split(' ')[0];
+    document.getElementById('whatsappLink').href = url;
+    document.getElementById('progressFill').style.width = '100%';
+    document.querySelectorAll('.sidebar-step').forEach(el => el.classList.add('done'));
+    window.scrollTo(0, 0);
+
+    // Abre o WhatsApp automaticamente
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>

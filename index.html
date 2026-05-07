@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Smart Home | Automação Residencial Premium</title>
+<meta name="description" content="Projetos de automação residencial em Mairiporã, Atibaia e região. Home theater, iluminação inteligente, câmeras e consultoria especializada. Engenheiro eletricista.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#07070f;
+  --surface:#0d0d1a;
+  --surface2:#141424;
+  --surface3:#1c1c30;
+  --border:rgba(255,255,255,0.07);
+  --border-h:rgba(255,255,255,0.14);
+  --text:#eff0f8;
+  --muted:rgba(239,240,248,0.55);
+  --dim:rgba(239,240,248,0.32);
+  --teal:#00d4aa;
+  --teal-d:rgba(0,212,170,0.1);
+  --teal-b:rgba(0,212,170,0.28);
+  --purple:#8b5cf6;
+  --purple-d:rgba(139,92,246,0.1);
+  --grad:linear-gradient(135deg,#00d4aa,#8b5cf6);
+  --r:12px;--rl:20px;--tr:.25s ease
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.gt{background:linear-gradient(135deg,#00d4aa,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,7,15,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo img{height:38px;width:auto}
+.nav-links{display:flex;gap:2rem;align-items:center;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:14px;transition:color var(--tr)}
+.nav-links a:hover{color:var(--text)}
+.btn-nav{background:var(--grad)!important;color:#fff!important;padding:10px 20px!important;border-radius:8px!important;font-size:13px!important;font-weight:500!important}
+.nav-mb{display:none}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 5% 80px;position:relative;overflow:hidden}
+.hero-glow-a{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,170,.07) 0%,transparent 70%);top:-120px;left:-160px;pointer-events:none}
+.hero-glow-b{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.1) 0%,transparent 70%);bottom:-100px;right:-80px;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface2);border:1px solid var(--border);padding:6px 14px;border-radius:100px;font-size:13px;color:var(--muted);margin-bottom:1.5rem}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,5vw,3.5rem);font-weight:800;line-height:1.08;letter-spacing:-.025em;margin-bottom:1.5rem}
+.hero-sub{font-size:1.05rem;color:var(--muted);font-weight:300;max-width:500px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--grad);color:#fff;padding:15px 26px;border-radius:var(--r);font-size:15px;font-weight:500;text-decoration:none;transition:opacity var(--tr),transform var(--tr);border:none;cursor:pointer}
+.btn-p:hover{opacity:.87;transform:translateY(-1px)}
+.btn-s{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--text);padding:15px 26px;border-radius:var(--r);font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--border-h);transition:all var(--tr)}
+.btn-s:hover{border-color:rgba(255,255,255,.25);background:var(--surface2)}
+
+/* HERO CARD */
+.hero-visual{display:flex;justify-content:center}
+.hcard-wrap{position:relative;width:320px;height:340px}
+.hcard{position:absolute;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:1.5rem}
+.hcard-main{width:285px;top:40px;left:18px;z-index:2}
+.hcard-back{width:265px;top:10px;left:36px;z-index:1;opacity:.4;border-color:rgba(0,212,170,.2)}
+.ci{width:44px;height:44px;border-radius:10px;background:var(--teal-d);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.ct{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:.4rem}
+.cd{font-size:13px;color:var(--muted);line-height:1.5}
+.cstat{display:flex;align-items:baseline;gap:6px;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.csn{font-family:'Syne',sans-serif;font-size:2rem;font-weight:700}
+.csl{font-size:13px;color:var(--muted)}
+
+/* METRICS */
+.metrics{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:2rem 5%}
+.metrics-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+.metric{text-align:center}
+.mn{font-family:'Syne',sans-serif;font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:.4rem}
+.ml{font-size:13px;color:var(--muted);font-weight:300}
+
+/* SECTION BASE */
+section{padding:96px 5%}
+.si{max-width:1200px;margin:0 auto}
+.sl{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
+.sh{font-family:'Syne',sans-serif;font-size:clamp(1.9rem,4vw,2.75rem);font-weight:700;line-height:1.12;letter-spacing:-.02em;margin-bottom:1.25rem}
+.sd{font-size:1.05rem;color:var(--muted);font-weight:300;max-width:560px;line-height:1.7}
+.s-head{margin-bottom:3.5rem}
+
+/* SERVICES */
+.s-bg{background:var(--surface)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.srv-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem;transition:border-color var(--tr),transform var(--tr)}
+.srv-card:hover{border-color:var(--border-h);transform:translateY(-4px)}
+.srv-card.feat{border-color:rgba(0,212,170,.35);background:linear-gradient(160deg,rgba(0,212,170,.06) 0%,var(--surface2) 55%)}
+.sico{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:24px}
+.sico.t{background:var(--teal-d)} .sico.p{background:var(--purple-d)}
+.sico.m{background:linear-gradient(135deg,var(--teal-d),var(--purple-d))}
+.stit{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:.7rem}
+.sdesc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;font-weight:300}
+.stag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:100px;border:1px solid}
+.stag.t{color:var(--teal);border-color:var(--teal-b)} .stag.p{color:var(--purple);border-color:rgba(139,92,246,.3)}
+
+/* SOBRE */
+.sobre-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center}
+.sobre-img-wrap{position:relative}
+.sobre-img-box{width:100%;aspect-ratio:3/4;border-radius:var(--rl);background:var(--surface2);border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.sobre-img-ph{text-align:center;color:var(--dim)}
+.sobre-img-ph p{font-size:12px;margin-top:.5rem}
+.sobre-badge-float{position:absolute;bottom:-16px;right:-16px;background:var(--surface2);border:1px solid var(--teal-b);border-radius:var(--rl);padding:1rem 1.25rem;display:flex;align-items:center;gap:10px}
+.sbf-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700}
+.sbf-txt{font-size:12px;color:var(--muted);line-height:1.3}
+.cred-list{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem}
+.cred-item{display:flex;align-items:flex-start;gap:12px}
+.cred-check{width:28px;height:28px;border-radius:50%;background:var(--teal-d);border:1px solid var(--teal-b);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:13px;color:var(--teal)}
+.cred-text strong{display:block;font-family:'Syne',sans-serif;font-weight:600;font-size:14px;margin-bottom:3px}
+.cred-text p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* HOW */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;position:relative}
+.steps-grid::before{content:'';position:absolute;top:26px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--teal),var(--purple),transparent);opacity:.25}
+.step{text-align:center;padding:1rem;position:relative;z-index:1}
+.stepn{width:52px;height:52px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--teal)}
+.stept{font-family:'Syne',sans-serif;font-size:1rem;font-weight:600;margin-bottom:.6rem}
+.stepd{font-size:14px;color:var(--muted);line-height:1.6;font-weight:300}
+
+/* DIFERENCIAIS */
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.diff-list{display:flex;flex-direction:column;gap:1.5rem}
+.diff-item{display:flex;gap:1rem;align-items:flex-start}
+.dck{width:24px;height:24px;border-radius:50%;background:var(--teal-d);border:1px solid var(--teal-b);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:12px;color:var(--teal)}
+.dtx strong{display:block;font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:4px}
+.dtx p{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
+
+/* PORTFOLIO */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.port-item{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
+.port-ph{text-align:center;color:var(--dim);padding:1rem}
+.port-ph .pico{font-size:2rem;margin-bottom:.5rem}
+.port-ph p{font-size:12px;line-height:1.4}
+.port-add-guide{margin-top:2rem;background:var(--surface2);border:1px solid var(--teal-b);border-radius:var(--r);padding:1.5rem}
+.pag-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--teal);margin-bottom:.75rem}
+.pag-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.pag-list li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.pag-list li::before{content:'→';color:var(--teal);flex-shrink:0;margin-top:1px}
+
+/* DEPOIMENTOS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.test-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem}
+.test-stars{color:#f59e0b;font-size:14px;margin-bottom:1rem;letter-spacing:2px}
+.test-txt{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.5rem;font-style:italic}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:#fff}
+.test-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:600}
+.test-loc{font-size:12px;color:var(--dim)}
+
+/* CTA */
+.cta-sec{padding:96px 5%;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(139,92,246,.1) 0%,transparent 70%);pointer-events:none}
+.cta-in{max-width:800px;margin:0 auto;text-align:center;position:relative;z-index:1}
+.cta-in h2{font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-.025em;margin-bottom:1.25rem}
+.cta-in p{font-size:1.05rem;color:var(--muted);margin-bottom:2.5rem;font-weight:300;line-height:1.7}
+.cta-g{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--dim);margin-top:1.5rem}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem 5%}
+.foot-in{max-width:1200px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.foot-logo img{height:42px;width:auto;margin-bottom:.75rem}
+.foot-copy{font-size:13px;color:var(--dim);line-height:1.6}
+.foot-links{display:flex;gap:2rem}
+.foot-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color var(--tr)}
+.foot-links a:hover{color:var(--text)}
+
+/* WA FLOAT */
+.wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;z-index:200;transition:transform var(--tr),box-shadow var(--tr)}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
+
+/* RESPONSIVE */
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr}.hero-visual{display:none}
+  .srv-grid{grid-template-columns:1fr}
+  .sobre-grid{grid-template-columns:1fr;gap:2.5rem}
+  .sobre-img-wrap{display:none}
+  .steps-grid{grid-template-columns:1fr 1fr}.steps-grid::before{display:none}
+  .diff-grid{grid-template-columns:1fr}
+  .test-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .metrics-in{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}.nav-mb{display:block}
+}
+@media(max-width:600px){
+  .portfolio-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  section{padding:70px 5%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="logo-branco.png" alt="Aurora Smart Home">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#projetos">Projetos</a></li>
+    <li><a href="aurora-formulario.html" class="btn-nav">Solicitar orçamento</a></li>
+  </ul>
+  <a href="aurora-formulario.html" class="btn-p nav-mb" target="_blank">Orçamento</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow-a"></div>
+  <div class="hero-glow-b"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="badge"><div class="dot"></div>Engenheiro especialista · Mairiporã e região</div>
+      <h1>Sua casa inteligente,<br><span class="gt">projetada do jeito certo.</span></h1>
+      <p class="hero-sub">Consultoria técnica e instalação de automação residencial por um engenheiro eletricista especializado. Do home theater à iluminação inteligente — do projeto à entrega.</p>
+      <div class="hero-btns">
+        <a href="aurora-formulario.html" class="btn-p">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          Solicitar orçamento gratuito
+        </a>
+        <a href="#servicos" class="btn-s">
+          Ver serviços
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hcard-wrap">
+        <div class="hcard hcard-back"></div>
+        <div class="hcard hcard-main">
+          <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <p class="ct">Home Theater Premium</p>
+          <p class="cd">Som surround · Projeção · Iluminação cênica · Controle integrado</p>
+          <div class="cstat"><span class="csl" style="font-size:13px;color:var(--muted)">🎬 Projeto personalizado · do planejamento à entrega</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metrics-in">
+    <div class="metric"><div class="mn gt">8+</div><div class="ml">Anos de experiência</div></div>
+    <div class="metric"><div class="mn gt">+50</div><div class="ml">Projetos entregues</div></div>
+    <div class="metric"><div class="mn gt">50km</div><div class="ml">Raio de atendimento</div></div>
+    <div class="metric"><div class="mn gt">100%</div><div class="ml">Satisfação garantida</div></div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<section id="servicos" class="s-bg">
+  <div class="si">
+    <div class="s-head">
+      <p class="sl">O que fazemos</p>
+      <h2 class="sh">Soluções completas<br>para sua residência</h2>
+      <p class="sd">De um projeto de home theater de alto padrão ao acompanhamento completo de obra — tudo com a precisão de um engenheiro eletricista especializado.</p>
+    </div>
+    <div class="srv-grid">
+
+      <div class="srv-card feat">
+        <div class="sico t">🎬</div>
+        <h3 class="stit">Home Theater Completo</h3>
+        <p class="sdesc">Projeto, instalação e configuração de sistemas de home theater de alto padrão. Som surround calibrado, projeção ou TV de grande formato, iluminação cênica automatizada e controle centralizado por um único app ou painel. Experiência cinematográfica na sua casa.</p>
+        <span class="stag t">Alta margem · Mais procurado</span>
+      </div>
+
+      <div class="srv-card">
+        <div class="sico p">🏠</div>
+        <h3 class="stit">Consultoria e Acompanhamento de Obra</h3>
+        <p class="sdesc">Ideal para quem está em obra e precisa de um especialista para projetar a infraestrutura correta. Elaboro o projeto técnico e acompanho a execução presencialmente — mesmo com a mão de obra da sua empreiteira. Zero retrabalho, zero improviso.</p>
+        <span class="stag p">Presencial ou virtual</span>
+      </div>
+
+      <div class="srv-card">
+        <div class="sico m">💡</div>
+        <h3 class="stit">Automação & Iluminação Inteligente</h3>
+        <p class="sdesc">Câmeras de segurança, rede Wi-Fi de alta performance, iluminação RGB inteligente, som ambiente, fechaduras e controle de ar-condicionado. Tudo integrado, funcionando pelo celular e entregue com treinamento completo.</p>
+        <span class="stag t">Instalação própria</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE O ENGENHEIRO -->
+<section id="sobre">
+  <div class="si">
+    <div class="sobre-grid">
+      <div class="sobre-img-wrap">
+        <div class="sobre-img-box">
+          <img src="Foto-Engenheiro.jpeg" style="width:100%;height:100%;object-fit:cover;object-position:top" alt="Augusto - Engenheiro Aurora Smart Home">
+        </div>
+        <div class="sobre-badge-float">
+          <div>
+            <div class="sbf-num gt">8+</div>
+            <div class="sbf-txt">anos de<br>experiência</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="sl">Quem está por trás</p>
+        <h2 class="sh">Engenheiro eletricista.<br><span class="gt">Especialista em automação.</span></h2>
+        <p class="sd">Olá, sou Augusto — engenheiro eletricista com mais de 8 anos de experiência exclusiva em automação residencial e projetos de alta tecnologia. Atendo pessoalmente cada projeto, do orçamento à entrega.</p>
+        <div class="cred-list">
+          <div class="cred-item">
+            <div class="cred-check">✓</div>
+            <div class="cred-text">
+              <strong>Formação em Engenharia Elétrica</strong>
+              <p>Base técnica sólida para projetar sistemas que funcionam de verdade — sem improvisos e sem retrabalho.</p>
+            </div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-check">✓</div>
+            <div class="cred-text">
+              <strong>+50 projetos entregues na Baixada Santista e região</strong>
+              <p>De home theaters de alto padrão a automações completas — todos com projeto técnico elaborado por mim.</p>
+            </div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-check">✓</div>
+            <div class="cred-text">
+              <strong>Você fala direto comigo, do começo ao fim</strong>
+              <p>Nenhum intermediário, nenhum vendedor que não entende de técnica. O engenheiro que projeta é o mesmo que executa.</p>
+            </div>
+          </div>
+          <div class="cred-item">
+            <div class="cred-check">✓</div>
+            <div class="cred-text">
+              <strong>Atendimento em Mairiporã, Atibaia, Bragança e região</strong>
+              <p>Raio de até 50km. Também atendo clientes na Baixada Santista remotamente para consultoria de projeto.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona" class="s-bg">
+  <div class="si">
+    <div class="s-head">
+      <p class="sl">Processo</p>
+      <h2 class="sh">Como trabalhamos</h2>
+      <p class="sd">Do primeiro contato à entrega final — um processo claro, sem surpresas, com você no controle de cada etapa.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="stepn">1</div>
+        <h4 class="stept">Conversa inicial</h4>
+        <p class="stepd">Me conta o que quer. Eu ouço, faço as perguntas certas e entendo o escopo real do projeto — sem compromisso.</p>
+      </div>
+      <div class="step">
+        <div class="stepn">2</div>
+        <h4 class="stept">Projeto técnico</h4>
+        <p class="stepd">Elaboro o projeto com especificação de equipamentos, infraestrutura e orçamento transparente. Sem surpresas no final.</p>
+      </div>
+      <div class="step">
+        <div class="stepn">3</div>
+        <h4 class="stept">Execução</h4>
+        <p class="stepd">Instalação e configuração com precisão técnica, ou acompanhamento da sua obra garantindo que o projeto saia fiel.</p>
+      </div>
+      <div class="step">
+        <div class="stepn">4</div>
+        <h4 class="stept">Entrega e suporte</h4>
+        <p class="stepd">Tudo funcionando, você treinado para operar. Suporte direto caso surja qualquer dúvida depois da entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section>
+  <div class="si">
+    <div class="diff-grid">
+      <div>
+        <p class="sl">Por que a Aurora</p>
+        <h2 class="sh">Engenheiro especializado.<br><span class="gt">Não uma empresa genérica.</span></h2>
+        <p class="sd" style="margin-top:.5rem">Quando você me contrata, fala diretamente com quem vai projetar, aprovar os materiais e garantir que tudo funcione.</p>
+      </div>
+      <div class="diff-list">
+        <div class="diff-item">
+          <div class="dck">✓</div>
+          <div class="dtx"><strong>Engenheiro no projeto, do início ao fim</strong><p>Sem intermediários. O profissional que elabora o projeto é o mesmo que executa — zero jogo de telefone.</p></div>
+        </div>
+        <div class="diff-item">
+          <div class="dck">✓</div>
+          <div class="dtx"><strong>Home theater como nenhum eletricista faz</strong><p>Acústica, calibração, integração de sistemas — é aqui que a engenharia faz diferença real no resultado final.</p></div>
+        </div>
+        <div class="diff-item">
+          <div class="dck">✓</div>
+          <div class="dtx"><strong>Acompanhamento presencial de obra</strong><p>Se você tem empreiteira ou eletricista, trabalho junto. Garanto que a infraestrutura fique certa antes de fechar as paredes.</p></div>
+        </div>
+        <div class="diff-item">
+          <div class="dck">✓</div>
+          <div class="dtx"><strong>Atendimento regional sem surpresas</strong><p>Mairiporã, Atibaia, Bragança Paulista, Itatiba e toda a região até 50km — com preço justo e transparente.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section id="projetos" class="s-bg">
+  <div class="si">
+    <div class="s-head">
+      <p class="sl">Portfólio</p>
+      <h2 class="sh">Projetos realizados</h2>
+      <p class="sd">Cada projeto é único. Exemplos reais de home theaters, automações e instalações entregues na região.</p>
+    </div>
+    <div class="portfolio-grid">
+      <!-- 
+        COMO ADICIONAR SUAS FOTOS:
+        Substitua cada bloco abaixo por:
+        <div class="port-item">
+          <img src="nome-da-foto.jpg" style="width:100%;height:100%;object-fit:cover" alt="Descrição do projeto">
+        </div>
+        
+        As fotos devem estar na mesma pasta do arquivo HTML.
+        Formatos aceitos: .jpg .jpeg .png .webp
+      -->
+      <div class="port-item">
+        <div class="port-ph"><div class="pico">🎬</div><p>Home Theater<br>Peruíbe · SP</p></div>
+      </div>
+      <div class="port-item">
+        <div class="port-ph"><div class="pico">💡</div><p>Iluminação inteligente<br>Mairiporã · SP</p></div>
+      </div>
+      <div class="port-item">
+        <div class="port-ph"><div class="pico">📡</div><p>Rede Wi-Fi + Câmeras<br>Atibaia · SP</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section>
+  <div class="si">
+    <div class="s-head">
+      <p class="sl">Depoimentos</p>
+      <h2 class="sh">O que dizem nossos clientes</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-txt">"O home theater ficou além do que eu esperava. Cada detalhe foi pensado — do som à iluminação. Augusto entregou um projeto de cinema de verdade dentro da minha casa."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#00d4aa,#8b5cf6)">MS</div>
+          <div><p class="test-name">Marcelo S.</p><p class="test-loc">Peruíbe, SP</p></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-txt">"Contratei para acompanhar a automação da minha obra. O Augusto esteve presente em cada visita e garantiu que nada fosse improvisado. Resultado impecável."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#8b5cf6,#00d4aa)">RC</div>
+          <div><p class="test-name">Ricardo C.</p><p class="test-loc">Atibaia, SP</p></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-txt">"Tinha medo de investir e não funcionar. Com a Aurora cada detalhe foi explicado antes e depois. Hoje minha casa funciona exatamente como eu queria."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:linear-gradient(135deg,#00d4aa,#00aaff)">AF</div>
+          <div><p class="test-name">Ana F.</p><p class="test-loc">Mairiporã, SP</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contato" class="cta-sec">
+  <div class="cta-in">
+    <p class="sl" style="text-align:center">Próximo passo</p>
+    <h2>Pronto para ter um<br><span class="gt">home theater de verdade?</span></h2>
+    <p>Me conta seu projeto pelo WhatsApp. Em qual fase está a obra, o que você quer — e eu te digo exatamente o que é possível fazer e o que vai custar, sem enrolação.</p>
+    <a href="aurora-formulario.html" class="btn-p" target="_blank" style="font-size:16px;padding:18px 36px;margin:0 auto;display:inline-flex">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.956-1.358l-.355-.21-3.683.967.984-3.595-.232-.371A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+      Falar pelo WhatsApp agora
+    </a>
+    <div class="cta-g">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Atendimento direto com o engenheiro · Sem call center · Orçamento gratuito
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="foot-logo"><img src="logo-branco.png" alt="Aurora Smart Home"></div>
+      <p class="foot-copy">© 2025 Aurora Smart Home<br>CNPJ: 50.034.788/0001-25<br>Mairiporã, SP · Atendemos até 50km de raio</p>
+    </div>
+    <div class="foot-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="mailto:contato@aurorasmarthome.com.br">E-mail</a>
+      <a href="https://wa.me/5513981201079" target="_blank">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="aurora-formulario.html" class="wa-float" target="_blank">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+</a>
+
+</body>
+</html>
