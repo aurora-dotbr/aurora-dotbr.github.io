@@ -2,10 +2,31 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#07070f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Aurora Smart Home | Automação Residencial Premium</title>
-<meta name="description" content="Projetos de automação residencial em Mairiporã, Atibaia e região. Home theater, iluminação inteligente, câmeras e consultoria especializada. Engenheiro eletricista.">
+<meta name="description" content="Engenheiro eletricista especializado em automação residencial. Home theater, infraestrutura para automação, Wi-Fi, iluminação inteligente. Atende Mairiporã, Atibaia, região e Baixada Santista.">
+
+<!-- Open Graph (preview no WhatsApp, Facebook, etc.) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aurorasmarthome.com.br/">
+<meta property="og:title" content="Aurora Smart Home | Automação Residencial por Engenheiro Especializado">
+<meta property="og:description" content="Home theater, infraestrutura para automação e Wi-Fi de alta performance. Do projeto à entrega, com engenheiro eletricista. Mairiporã, Atibaia e região.">
+<meta property="og:image" content="https://aurorasmarthome.com.br/home-theater-acquamare.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="logo-branco.png">
+<link rel="apple-touch-icon" href="logo-branco.png">
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -13,7 +34,6 @@
   --black:#07070f;
   --surface:#0d0d1a;
   --surface2:#141424;
-  --surface3:#1c1c30;
   --border:rgba(255,255,255,0.07);
   --border-h:rgba(255,255,255,0.14);
   --text:#eff0f8;
@@ -87,7 +107,7 @@ section{padding:96px 5%}
 
 /* SERVICES */
 .s-bg{background:var(--surface)}
-.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.srv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
 .srv-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem;transition:border-color var(--tr),transform var(--tr)}
 .srv-card:hover{border-color:var(--border-h);transform:translateY(-4px)}
 .srv-card.feat{border-color:rgba(0,212,170,.35);background:linear-gradient(160deg,rgba(0,212,170,.06) 0%,var(--surface2) 55%)}
@@ -103,8 +123,6 @@ section{padding:96px 5%}
 .sobre-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center}
 .sobre-img-wrap{position:relative}
 .sobre-img-box{width:100%;aspect-ratio:3/4;border-radius:var(--rl);background:var(--surface2);border:1px solid var(--border);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.sobre-img-ph{text-align:center;color:var(--dim)}
-.sobre-img-ph p{font-size:12px;margin-top:.5rem}
 .sobre-badge-float{position:absolute;bottom:-16px;right:-16px;background:var(--surface2);border:1px solid var(--teal-b);border-radius:var(--rl);padding:1rem 1.25rem;display:flex;align-items:center;gap:10px}
 .sbf-num{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700}
 .sbf-txt{font-size:12px;color:var(--muted);line-height:1.3}
@@ -133,14 +151,9 @@ section{padding:96px 5%}
 /* PORTFOLIO */
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
 .port-item{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
-.port-ph{text-align:center;color:var(--dim);padding:1rem}
-.port-ph .pico{font-size:2rem;margin-bottom:.5rem}
-.port-ph p{font-size:12px;line-height:1.4}
-.port-add-guide{margin-top:2rem;background:var(--surface2);border:1px solid var(--teal-b);border-radius:var(--r);padding:1.5rem}
-.pag-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:var(--teal);margin-bottom:.75rem}
-.pag-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.pag-list li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
-.pag-list li::before{content:'→';color:var(--teal);flex-shrink:0;margin-top:1px}
+.port-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
+.port-item:hover .port-foto{transform:scale(1.04)}
+.port-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(7,7,15,.8));color:#fff;font-size:.78rem;font-weight:500;padding:1.5rem .8rem .55rem;letter-spacing:.01em;pointer-events:none}
 
 /* DEPOIMENTOS */
 .test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
@@ -173,10 +186,23 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
 .wa-float{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;z-index:200;transition:transform var(--tr),box-shadow var(--tr)}
 .wa-float:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(37,211,102,.55)}
 
-/* RESPONSIVE */
+/* PARA ARQUITETOS */
+.arq-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.arq-list{display:flex;flex-direction:column;gap:1.5rem}
+.arq-item{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);transition:border-color var(--tr)}
+.arq-item:hover{border-color:var(--border-h)}
+.arq-ico{font-size:22px;flex-shrink:0;width:44px;height:44px;background:var(--purple-d);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.arq-item strong{display:block;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;margin-bottom:4px}
+.arq-item p{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+
+/* FOTO MOBILE — sempre oculta no desktop */
+.sobre-mobile-foto{display:none}
+
+/* RESPONSIVE — TABLET */
 @media(max-width:920px){
+  .arq-grid{grid-template-columns:1fr;gap:2.5rem}
   .hero-grid{grid-template-columns:1fr}.hero-visual{display:none}
-  .srv-grid{grid-template-columns:1fr}
+  .srv-grid{grid-template-columns:repeat(2,1fr)}
   .sobre-grid{grid-template-columns:1fr;gap:2.5rem}
   .sobre-img-wrap{display:none}
   .steps-grid{grid-template-columns:1fr 1fr}.steps-grid::before{display:none}
@@ -186,10 +212,79 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
   .metrics-in{grid-template-columns:1fr 1fr}
   .nav-links{display:none}.nav-mb{display:block}
 }
+
+/* RESPONSIVE — MOBILE */
 @media(max-width:600px){
-  .portfolio-grid{grid-template-columns:1fr}
-  .steps-grid{grid-template-columns:1fr}
-  section{padding:70px 5%}
+  /* Layout geral */
+  section{padding:60px 4%}
+  .si{width:100%}
+
+  /* Nav */
+  nav{height:60px;padding:0 4%}
+  .nav-logo img{height:32px}
+  .nav-mb{font-size:13px;padding:10px 16px!important}
+
+  /* Hero */
+  .hero{padding:90px 4% 60px;min-height:auto}
+  .hero h1{font-size:clamp(2rem,8vw,2.8rem);margin-bottom:1.2rem}
+  .hero-sub{font-size:.95rem;margin-bottom:2rem}
+  .hero-btns{flex-direction:column;gap:.75rem}
+  .btn-p,.btn-s{width:100%;justify-content:center;padding:16px 20px;font-size:15px}
+  .badge{font-size:12px;padding:5px 12px}
+
+  /* Métricas */
+  .metrics-in{grid-template-columns:1fr 1fr;gap:1.25rem}
+  .mn{font-size:1.8rem}
+
+  /* Serviços */
+  .srv-grid{grid-template-columns:1fr;gap:1rem}
+  .srv-card{padding:1.4rem}
+
+  /* Steps */
+  .steps-grid{grid-template-columns:1fr;gap:1rem}
+  .step{padding:.75rem}
+
+  /* Diferenciais */
+  .diff-grid{grid-template-columns:1fr;gap:2rem}
+
+  /* Portfólio */
+  .portfolio-grid{grid-template-columns:1fr;gap:1rem}
+  .portfolio-grid .port-item:first-child{aspect-ratio:9/16!important;max-height:480px;max-width:280px;margin:0 auto;width:100%}
+  .portfolio-grid .port-item:first-child iframe{min-height:unset!important;height:100%!important;width:100%!important}
+
+  /* Depoimentos */
+  .test-grid{grid-template-columns:1fr;gap:1rem}
+  .test-card{padding:1.4rem}
+
+  /* CTA */
+  .cta-sec{padding:60px 4%}
+  .cta-in h2{font-size:clamp(1.7rem,7vw,2.2rem)}
+  .cta-in .btn-p{width:100%;justify-content:center;padding:16px 20px;font-size:15px}
+
+  /* Títulos de seção */
+  .sh{font-size:clamp(1.6rem,6vw,2rem)}
+  .s-head{margin-bottom:2rem}
+
+  /* Seção arquitetos */
+  .arq-item{padding:1rem;gap:.75rem}
+  .arq-item p{font-size:12px}
+  .arq-ico{width:36px;height:36px;font-size:18px;border-radius:8px}
+
+  /* Footer */
+  .foot-in{flex-direction:column;gap:1.5rem}
+  .foot-links{flex-wrap:wrap;gap:1rem}
+
+  /* WhatsApp float */
+  .wa-float{bottom:20px;right:16px;width:52px;height:52px}
+
+  /* Opções do formulário */
+  .option-cards{grid-template-columns:1fr!important}
+
+  /* Foto discreta do engenheiro no mobile */
+  .sobre-mobile-foto{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r)}
+  .sobre-mobile-foto img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--teal-b);flex-shrink:0}
+  .sobre-mobile-nome{display:block;font-family:'Syne',sans-serif;font-size:14px;font-weight:600}
+  .sobre-mobile-cargo{display:block;font-size:11px;color:var(--muted);margin-top:2px}
 }
 </style>
 </head>
@@ -206,7 +301,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <li><a href="#projetos">Projetos</a></li>
     <li><a href="aurora-formulario.html" class="btn-nav">Solicitar orçamento</a></li>
   </ul>
-  <a href="aurora-formulario.html" class="btn-p nav-mb" target="_blank">Orçamento</a>
+  <a href="aurora-formulario.html" class="btn-p nav-mb" target="_blank" rel="noopener">Orçamento</a>
 </nav>
 
 <!-- HERO -->
@@ -217,7 +312,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <div>
       <div class="badge"><div class="dot"></div>Engenheiro especialista · Mairiporã e região</div>
       <h1>Sua casa inteligente,<br><span class="gt">projetada do jeito certo.</span></h1>
-      <p class="hero-sub">Consultoria técnica e instalação de automação residencial por um engenheiro eletricista especializado. Do home theater à iluminação inteligente — do projeto à entrega.</p>
+      <p class="hero-sub">Engenheiro eletricista especializado em automação residencial. Do home theater à iluminação inteligente — do projeto à entrega.</p>
       <div class="hero-btns">
         <a href="aurora-formulario.html" class="btn-p">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
@@ -266,22 +361,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       <div class="srv-card feat">
         <div class="sico t">🎬</div>
         <h3 class="stit">Home Theater Completo</h3>
-        <p class="sdesc">Projeto, instalação e configuração de sistemas de home theater de alto padrão. Som surround calibrado, projeção ou TV de grande formato, iluminação cênica automatizada e controle centralizado por um único app ou painel. Experiência cinematográfica na sua casa.</p>
-        <span class="stag t">Alta margem · Mais procurado</span>
+        <p class="sdesc">Som surround calibrado, projeção ou TV de grande formato, iluminação cênica e controle por um único app. Experiência de cinema dentro da sua casa, projetada do zero.</p>
+        <span class="stag t">Projeto personalizado · Do planejamento à entrega</span>
+      </div>
+
+      <div class="srv-card feat" style="border-color:rgba(0,212,170,.3);background:linear-gradient(160deg,rgba(0,212,170,.05) 0%,var(--surface2) 55%)">
+        <div class="sico t">🏗️</div>
+        <h3 class="stit">Casa Pronta para Automação</h3>
+        <p class="sdesc">O melhor momento de passar infraestrutura é durante a obra, com as paredes abertas. Cabos de rede, áudio, vídeo e automação instalados agora — quando quiser ampliar no futuro, só conectar. Sem quebrar, sem improvisar.</p>
+        <span class="stag t">Obras e reformas · Planejamento de longo prazo</span>
       </div>
 
       <div class="srv-card">
         <div class="sico p">🏠</div>
-        <h3 class="stit">Consultoria e Acompanhamento de Obra</h3>
-        <p class="sdesc">Ideal para quem está em obra e precisa de um especialista para projetar a infraestrutura correta. Elaboro o projeto técnico e acompanho a execução presencialmente — mesmo com a mão de obra da sua empreiteira. Zero retrabalho, zero improviso.</p>
-        <span class="stag p">Presencial ou virtual</span>
+        <h3 class="stit">Consultoria e Projeto de Infraestrutura</h3>
+        <p class="sdesc">Recebo a planta, projeto a infraestrutura de automação e alinho com vigas, luminárias e acabamentos — tudo antes das paredes fecharem. Atendimento remoto, presencial quando necessário.</p>
+        <span class="stag p">Remoto · Compatibilização com arquitetura</span>
       </div>
 
       <div class="srv-card">
         <div class="sico m">💡</div>
         <h3 class="stit">Automação & Iluminação Inteligente</h3>
-        <p class="sdesc">Câmeras de segurança, rede Wi-Fi de alta performance, iluminação RGB inteligente, som ambiente, fechaduras e controle de ar-condicionado. Tudo integrado, funcionando pelo celular e entregue com treinamento completo.</p>
-        <span class="stag t">Instalação própria</span>
+        <p class="sdesc">Wi-Fi de alta performance, iluminação inteligente, som ambiente, câmeras, fechaduras digitais e ar-condicionado. Tudo num único app, com instalação profissional e treinamento incluso.</p>
+        <span class="stag t">Instalação profissional · Treinamento incluso</span>
       </div>
 
     </div>
@@ -306,6 +408,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
 
       <div>
         <p class="sl">Quem está por trás</p>
+        <!-- Foto discreta visível só no mobile -->
+        <div class="sobre-mobile-foto">
+          <img src="Foto-Engenheiro.jpeg" alt="Augusto - Aurora Smart Home">
+          <div>
+            <span class="sobre-mobile-nome">Augusto</span>
+            <span class="sobre-mobile-cargo">Engenheiro Eletricista · Automação</span>
+          </div>
+        </div>
         <h2 class="sh">Engenheiro eletricista.<br><span class="gt">Especialista em automação.</span></h2>
         <p class="sd">Olá, sou Augusto — engenheiro eletricista com mais de 8 anos de experiência exclusiva em automação residencial e projetos de alta tecnologia. Atendo pessoalmente cada projeto, do orçamento à entrega.</p>
         <div class="cred-list">
@@ -400,7 +510,58 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
         </div>
         <div class="diff-item">
           <div class="dck">✓</div>
+          <div class="dtx"><strong>Consultor técnico remoto para arquitetos</strong><p>Projeto a infra de automação a partir da planta baixa, alinho com vigas e luminárias e tiro dúvidas em tempo real — sem deslocamento, sem atrasar o cronograma.</p></div>
+        </div>
+        <div class="diff-item">
+          <div class="dck">✓</div>
           <div class="dtx"><strong>Atendimento regional sem surpresas</strong><p>Mairiporã, Atibaia, Bragança Paulista, Itatiba e toda a região até 50km — com preço justo e transparente.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA ARQUITETOS -->
+<section class="s-bg" id="parceiros">
+  <div class="si">
+    <div class="arq-grid">
+      <div>
+        <p class="sl">Para arquitetos e designers de interiores</p>
+        <h2 class="sh">Seu consultor técnico<br><span class="gt">de automação, à distância.</span></h2>
+        <p class="sd" style="margin-top:.5rem">Você me envia a planta — eu projeto a infraestrutura completa, defino onde ficam os cabos, a central de automação e os pontos de cada ambiente. Tudo alinhado com o seu projeto antes das paredes fecharem. O cliente pode não comprar os equipamentos agora, mas a casa já sai preparada para qualquer expansão futura.</p>
+        <a href="https://wa.me/5513981201079?text=Olá%20Augusto!%20Sou%20arquiteto(a)%20e%20gostaria%20de%20conversar%20sobre%20o%20projeto%20de%20infraestrutura%20de%20automa%C3%A7%C3%A3o%20de%20um%20cliente." class="btn-p" target="_blank" rel="noopener noreferrer" style="margin-top:2rem;display:inline-flex">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          Falar sobre um projeto
+        </a>
+      </div>
+      <div class="arq-list">
+        <div class="arq-item">
+          <div class="arq-ico">🗂️</div>
+          <div>
+            <strong>Projeto de infra a partir da sua planta</strong>
+            <p>Defino central de automação, rack, eletrodutos e pontos por ambiente — documentado para incorporar direto no seu projeto executivo.</p>
+          </div>
+        </div>
+        <div class="arq-item">
+          <div class="arq-ico">📐</div>
+          <div>
+            <strong>Compatibilização com estrutura e acabamentos</strong>
+            <p>Alinhamos vigas, luminárias e tipo de parede antes de fechar o gesso — zero retrabalho na obra.</p>
+          </div>
+        </div>
+        <div class="arq-item">
+          <div class="arq-ico">💬</div>
+          <div>
+            <strong>Tira-dúvidas técnico em tempo real</strong>
+            <p>Atendo por videochamada ou WhatsApp. Dúvida no detalhamento — onde sai o ponto de som, como embutir o painel — eu respondo na hora, sem esperar visita.</p>
+          </div>
+        </div>
+        <div class="arq-item">
+          <div class="arq-ico">⭐</div>
+          <div>
+            <strong>Condições especiais para parceiros fixos</strong>
+            <p>Arquitetos com quem trabalho regularmente têm atendimento prioritário e condições diferenciadas. Fale comigo para alinharmos os detalhes.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -416,24 +577,23 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       <p class="sd">Cada projeto é único. Exemplos reais de home theaters, automações e instalações entregues na região.</p>
     </div>
     <div class="portfolio-grid">
-      <!-- 
-        COMO ADICIONAR SUAS FOTOS:
-        Substitua cada bloco abaixo por:
-        <div class="port-item">
-          <img src="nome-da-foto.jpg" style="width:100%;height:100%;object-fit:cover" alt="Descrição do projeto">
-        </div>
-        
-        As fotos devem estar na mesma pasta do arquivo HTML.
-        Formatos aceitos: .jpg .jpeg .png .webp
-      -->
-      <div class="port-item">
-        <div class="port-ph"><div class="pico">🎬</div><p>Home Theater<br>Peruíbe · SP</p></div>
+      <div class="port-item" style="aspect-ratio:unset;display:block;padding:0;overflow:hidden;">
+        <iframe
+          src="https://www.youtube.com/embed/8oPDxH8-7vk"
+          title="Automação Aurora Smart Home — Controle por voz"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width:100%;height:100%;min-height:280px;display:block;border:none;">
+        </iframe>
       </div>
-      <div class="port-item">
-        <div class="port-ph"><div class="pico">💡</div><p>Iluminação inteligente<br>Mairiporã · SP</p></div>
+      <div class="port-item" style="padding:0;">
+        <img src="home-theater-acquamare.jpg" alt="Home theater com iluminação LED e projetor — Condomínio Acqua Mare, Praia Grande SP" class="port-foto">
+        <div class="port-label">🎬 Home Theater · Praia Grande, SP</div>
       </div>
-      <div class="port-item">
-        <div class="port-ph"><div class="pico">📡</div><p>Rede Wi-Fi + Câmeras<br>Atibaia · SP</p></div>
+      <div class="port-item" style="padding:0;">
+        <img src="wifi-survey.jpg" alt="Site survey de rede Wi-Fi — posicionamento de Access Points por planta baixa" class="port-foto" style="object-position:center center;">
+        <div class="port-label">📡 Site Survey Wi-Fi · Posicionamento de APs</div>
       </div>
     </div>
   </div>
@@ -481,7 +641,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <p class="sl" style="text-align:center">Próximo passo</p>
     <h2>Pronto para ter um<br><span class="gt">home theater de verdade?</span></h2>
     <p>Me conta seu projeto pelo WhatsApp. Em qual fase está a obra, o que você quer — e eu te digo exatamente o que é possível fazer e o que vai custar, sem enrolação.</p>
-    <a href="aurora-formulario.html" class="btn-p" target="_blank" style="font-size:16px;padding:18px 36px;margin:0 auto;display:inline-flex">
+    <a href="aurora-formulario.html" class="btn-p" target="_blank" rel="noopener" style="font-size:16px;padding:18px 36px;margin:0 auto;display:inline-flex">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.956-1.358l-.355-.21-3.683.967.984-3.595-.232-.371A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
       Falar pelo WhatsApp agora
     </a>
@@ -504,13 +664,13 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       <a href="#sobre">Sobre</a>
       <a href="#projetos">Projetos</a>
       <a href="mailto:contato@aurorasmarthome.com.br">E-mail</a>
-      <a href="https://wa.me/5513981201079" target="_blank">WhatsApp</a>
+      <a href="https://wa.me/5513981201079" target="_blank" rel="noopener noreferrer">WhatsApp</a>
     </div>
   </div>
 </footer>
 
 <!-- WHATSAPP FLOAT -->
-<a href="aurora-formulario.html" class="wa-float" target="_blank">
+<a href="https://wa.me/5513981201079" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
 </a>
 
