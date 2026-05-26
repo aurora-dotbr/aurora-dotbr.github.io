@@ -87,7 +87,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(7,7,15,.88);
 .ct{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;margin-bottom:.4rem}
 .cd{font-size:13px;color:var(--muted);line-height:1.5}
 .cstat{display:flex;align-items:baseline;gap:6px;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--border)}
-.csn{font-family:'Syne',sans-serif;font-size:2rem;font-weight:700}
 .csl{font-size:13px;color:var(--muted)}
 
 /* METRICS */
@@ -111,12 +110,15 @@ section{padding:96px 5%}
 .srv-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rl);padding:1.75rem;transition:border-color var(--tr),transform var(--tr)}
 .srv-card:hover{border-color:var(--border-h);transform:translateY(-4px)}
 .srv-card.feat{border-color:rgba(0,212,170,.35);background:linear-gradient(160deg,rgba(0,212,170,.06) 0%,var(--surface2) 55%)}
-.sico{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:24px}
+.sico{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;font-size:24px;flex-shrink:0}
+.srv-card-hd{display:flex;align-items:center;gap:.85rem;margin-bottom:1.25rem}
+.srv-card-hd .sico{margin-bottom:0}
+.srv-card-hd .stit{margin-bottom:0;line-height:1.25}
 .sico.t{background:var(--teal-d)} .sico.p{background:var(--purple-d)}
 .sico.m{background:linear-gradient(135deg,var(--teal-d),var(--purple-d))}
 .stit{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:.7rem}
 .sdesc{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;font-weight:300}
-.stag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:100px;border:1px solid}
+.stag{display:block;text-align:center;font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;padding:6px 10px;border-radius:100px;border:1px solid}
 .stag.t{color:var(--teal);border-color:var(--teal-b)} .stag.p{color:var(--purple);border-color:rgba(139,92,246,.3)}
 
 /* SOBRE */
@@ -149,7 +151,13 @@ section{padding:96px 5%}
 .dtx p{font-size:14px;color:var(--muted);font-weight:300;line-height:1.6}
 
 /* PORTFOLIO */
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.portfolio-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+
+/* CARD COM FOTO DE FUNDO */
+.srv-card-bg-foto{position:relative;overflow:hidden}
+.srv-card-bg-foto::before{content:'';position:absolute;inset:0;background:var(--bg-foto) var(--bg-pos,center 20%)/cover no-repeat;opacity:.18;z-index:0;transition:opacity .4s ease;border-radius:inherit}
+.srv-card-bg-foto:hover::before{opacity:.28}
+.srv-card-bg-foto>*{position:relative;z-index:1}
 .port-item{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative}
 .port-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
 .port-item:hover .port-foto{transform:scale(1.04)}
@@ -208,7 +216,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
   .steps-grid{grid-template-columns:1fr 1fr}.steps-grid::before{display:none}
   .diff-grid{grid-template-columns:1fr}
   .test-grid{grid-template-columns:1fr}
-  .portfolio-grid{grid-template-columns:repeat(3,1fr)}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr)}
   .metrics-in{grid-template-columns:1fr 1fr}
   .nav-links{display:none}.nav-mb{display:block}
 }
@@ -278,9 +286,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
   /* WhatsApp float */
   .wa-float{bottom:20px;right:16px;width:52px;height:52px}
 
-  /* Opções do formulário */
-  .option-cards{grid-template-columns:1fr!important}
-
   /* Foto discreta do engenheiro no mobile */
   .sobre-mobile-foto{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r)}
   .sobre-mobile-foto img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid var(--teal-b);flex-shrink:0}
@@ -302,7 +307,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <li><a href="#projetos">Projetos</a></li>
     <li><a href="aurora-formulario.html" class="btn-nav">Solicitar orçamento</a></li>
   </ul>
-  <a href="aurora-formulario.html" class="btn-p nav-mb" target="_blank" rel="noopener">Orçamento</a>
+  <a href="aurora-formulario.html" class="btn-p nav-mb" target="_blank" rel="noopener noreferrer">Orçamento</a>
 </nav>
 
 <!-- HERO -->
@@ -359,30 +364,38 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     </div>
     <div class="srv-grid">
 
-      <div class="srv-card feat">
-        <div class="sico t">🎬</div>
-        <h3 class="stit">Home Theater Completo</h3>
+      <div class="srv-card feat srv-card-bg-foto" style="--bg-foto:url('home-theater-acquamare.jpg');--bg-pos:center 40%">
+        <div class="srv-card-hd">
+          <div class="sico t">🎬</div>
+          <h3 class="stit">Home Theater Completo</h3>
+        </div>
         <p class="sdesc">Som surround calibrado, projeção ou TV de grande formato, iluminação cênica e controle por um único app. Experiência de cinema dentro da sua casa, projetada do zero.</p>
         <span class="stag t">Projeto personalizado · Do planejamento à entrega</span>
       </div>
 
-      <div class="srv-card feat" style="border-color:rgba(0,212,170,.3);background:linear-gradient(160deg,rgba(0,212,170,.05) 0%,var(--surface2) 55%)">
-        <div class="sico t">🏗️</div>
-        <h3 class="stit">Casa Pronta para Automação</h3>
+      <div class="srv-card feat srv-card-bg-foto" style="border-color:rgba(0,212,170,.3);background:linear-gradient(160deg,rgba(0,212,170,.05) 0%,var(--surface2) 55%);--bg-foto:url('infra-obra.jpg');--bg-pos:center 15%">
+        <div class="srv-card-hd">
+          <div class="sico t">🏗️</div>
+          <h3 class="stit">Casa Pronta para Automação</h3>
+        </div>
         <p class="sdesc">O melhor momento de passar infraestrutura é durante a obra, com as paredes abertas. Cabos de rede, áudio, vídeo e automação instalados agora — quando quiser ampliar no futuro, só conectar. Sem quebrar, sem improvisar.</p>
         <span class="stag t">Obras e reformas · Planejamento de longo prazo</span>
       </div>
 
-      <div class="srv-card">
-        <div class="sico p">🏠</div>
-        <h3 class="stit">Consultoria e Projeto de Infraestrutura</h3>
+      <div class="srv-card srv-card-bg-foto" style="--bg-foto:url('projeto-infra.jpg');--bg-pos:center center">
+        <div class="srv-card-hd">
+          <div class="sico p">🏠</div>
+          <h3 class="stit">Consultoria e Projeto de Infraestrutura</h3>
+        </div>
         <p class="sdesc">Recebo a planta, projeto a infraestrutura de automação e alinho com vigas, luminárias e acabamentos — tudo antes das paredes fecharem. Atendimento remoto, presencial quando necessário.</p>
         <span class="stag p">Remoto · Compatibilização com arquitetura</span>
       </div>
 
-      <div class="srv-card">
-        <div class="sico m">💡</div>
-        <h3 class="stit">Automação & Iluminação Inteligente</h3>
+      <div class="srv-card srv-card-bg-foto" style="--bg-foto:url('automacao-iluminacao.jpg');--bg-pos:center 35%">
+        <div class="srv-card-hd">
+          <div class="sico m">💡</div>
+          <h3 class="stit">Automação & Iluminação Inteligente</h3>
+        </div>
         <p class="sdesc">Wi-Fi de alta performance, iluminação inteligente, som ambiente, câmeras, fechaduras digitais e ar-condicionado. Tudo num único app, com instalação profissional e treinamento incluso.</p>
         <span class="stag t">Instalação profissional · Treinamento incluso</span>
       </div>
@@ -575,7 +588,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <div class="s-head">
       <p class="sl">Portfólio</p>
       <h2 class="sh">Projetos realizados</h2>
-      <p class="sd">Cada projeto é único. Exemplos reais de home theaters, automações e instalações entregues na região.</p>
+      <p class="sd">Cada projeto é único. Exemplos reais de home theaters, automações, infraestruturas e instalações entregues em todo o Brasil.</p>
     </div>
     <div class="portfolio-grid">
       <div class="port-item port-video" style="aspect-ratio:unset;display:block;padding:0;overflow:hidden;">
@@ -589,7 +602,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
         </iframe>
       </div>
       <div class="port-item" style="padding:0;">
-        <img src="home-theater-acquamare.jpg" alt="Home theater com iluminação LED e projetor — Condomínio Acqua Mare, Praia Grande SP" class="port-foto">
+        <img src="home-theater-acquamare.jpg" alt="Home theater com iluminação LED e projetor — Condomínio Acqua Mare, Praia Grande SP" class="port-foto" loading="lazy">
         <div class="port-label">🎬 Home Theater · Praia Grande, SP</div>
       </div>
       <div class="port-item port-video" style="aspect-ratio:unset;display:block;padding:0;overflow:hidden;">
@@ -601,6 +614,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
           allowfullscreen
           style="width:100%;height:100%;min-height:280px;display:block;border:none;">
         </iframe>
+      </div>
+      <div class="port-item" style="padding:0;">
+        <img src="cameras-instalacao.jpg" alt="Câmera de segurança Intelbras Multi HD instalada — Aurora Smart Home" class="port-foto" loading="lazy">
+        <div class="port-label">📷 Câmeras de Segurança · Intelbras Multi HD</div>
       </div>
     </div>
   </div>
@@ -648,7 +665,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
     <p class="sl" style="text-align:center">Próximo passo</p>
     <h2>Seu projeto,<br><span class="gt">resolvido de onde você estiver.</span></h2>
     <p>Me conta o que você quer — fase da obra, tipo de projeto, cidade. Eu te digo exatamente o que é possível fazer e o que vai custar. Sem enrolação, sem visita técnica desnecessária.</p>
-    <a href="aurora-formulario.html" class="btn-p" target="_blank" rel="noopener" style="font-size:16px;padding:18px 36px;margin:0 auto;display:inline-flex">
+    <a href="aurora-formulario.html" class="btn-p" target="_blank" rel="noopener noreferrer" style="font-size:16px;padding:18px 36px;margin:0 auto;display:inline-flex">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 01-4.956-1.358l-.355-.21-3.683.967.984-3.595-.232-.371A9.712 9.712 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
       Falar pelo WhatsApp agora
     </a>
@@ -664,7 +681,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
   <div class="foot-in">
     <div>
       <div class="foot-logo"><img src="logo-branco.png" alt="Aurora Smart Home"></div>
-      <p class="foot-copy">© 2025 Aurora Smart Home<br>CNPJ: 50.034.788/0001-25<br>Atendimento remoto · Todo o Brasil</p>
+      <p class="foot-copy">© 2026 Aurora Smart Home<br>CNPJ: 50.034.788/0001-25<br>Atendimento remoto · Todo o Brasil</p>
     </div>
     <div class="foot-links">
       <a href="#servicos">Serviços</a>
