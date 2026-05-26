@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aurora Smart Home · Solicitar Orçamento</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -76,7 +76,7 @@
   }
 
   .logo-text {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 17px;
     font-weight: 700;
     color: var(--text);
@@ -94,7 +94,7 @@
   }
 
   .sidebar-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.2;
@@ -150,7 +150,7 @@
     background: var(--surface2);
     border: 1px solid var(--border);
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 12px;
     font-weight: 600;
     color: var(--text-muted);
@@ -237,7 +237,7 @@
   }
 
   .step-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -437,7 +437,7 @@
   }
 
   .success-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
@@ -500,7 +500,7 @@
     </a>
 
     <h2 class="sidebar-title">Solicite seu<br><span class="grad-text">orçamento grátis</span></h2>
-    <p class="sidebar-desc">Responda algumas perguntas rápidas para que eu possa montar uma proposta precisa e sem surpresas para o seu projeto.</p>
+    <p class="sidebar-desc">Responda algumas perguntas rápidas e eu monto uma proposta para o seu projeto.</p>
 
     <div class="sidebar-steps" id="sidebarSteps">
       <div class="sidebar-step active" data-for="1">
@@ -544,7 +544,7 @@
       <div class="step-heading">
         <p class="step-num-label">Etapa 1 de 5</p>
         <h2 class="step-title">Como posso te chamar?</h2>
-        <p class="step-desc">Informações básicas para eu conseguir entrar em contato com a sua proposta.</p>
+        <p class="step-desc">Preciso do seu contato para te enviar a proposta.</p>
       </div>
 
       <div class="field">
@@ -577,7 +577,7 @@
       <div class="step-heading">
         <p class="step-num-label">Etapa 2 de 5</p>
         <h2 class="step-title">Em que fase está o projeto?</h2>
-        <p class="step-desc">Isso define o que é possível instalar e qual é a melhor abordagem técnica.</p>
+        <p class="step-desc">Isso define o que é possível fazer no seu caso.</p>
       </div>
 
       <div class="field">
@@ -683,7 +683,7 @@
       <div class="conditional" id="planta_aviso">
         <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(0,212,170,0.07);border:1px solid rgba(0,212,170,0.25);border-radius:var(--radius);padding:14px 16px;margin-bottom:1rem;">
           <span style="font-size:18px;flex-shrink:0;">💡</span>
-          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Ótimo! Após enviar este formulário, encaminhe o arquivo da planta (PDF, JPG ou DWG) diretamente pelo WhatsApp. Isso vai agilizar muito a análise e o orçamento.</p>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Ótimo. Depois de enviar, me manda a planta pelo WhatsApp (PDF, JPG ou DWG). Facilita bastante na hora do orçamento.</p>
         </div>
       </div>
 
@@ -701,7 +701,7 @@
       <div class="step-heading">
         <p class="step-num-label">Etapa 3 de 5</p>
         <h2 class="step-title">Iluminação inteligente</h2>
-        <p class="step-desc">Controle de iluminação automatizado por cômodo, cenas programadas e integração com assistentes de voz.</p>
+        <p class="step-desc">Controle por cômodo, cenas programadas e integração com Alexa ou Google Home.</p>
       </div>
 
       <div class="field">
@@ -891,7 +891,7 @@
       <div class="step-heading">
         <p class="step-num-label">Etapa 5 de 5</p>
         <h2 class="step-title">Som, rede e outros sistemas</h2>
-        <p class="step-desc">Última etapa — me conta sobre os demais sistemas que você tem interesse.</p>
+        <p class="step-desc">Última etapa. Me conta o que mais você quer.</p>
       </div>
 
       <div class="field">
@@ -980,7 +980,7 @@
     <div class="success-screen" id="successScreen">
       <div class="success-icon">✓</div>
       <h2 class="success-title">Perfeito, <span class="grad-text" id="successNome"></span>!</h2>
-      <p class="success-desc">Recebi suas informações. Vou montar uma proposta personalizada e entrar em contato com você em breve pelo WhatsApp.</p>
+      <p class="success-desc">Recebi tudo. Vou analisar e te chamar no WhatsApp em breve.</p>
       <a id="whatsappLink" href="#" class="btn-whatsapp" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.124 1.528 5.855L.057 23.487a.75.75 0 00.914.97l5.87-1.54A11.938 11.938 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
         Confirmar pelo WhatsApp
