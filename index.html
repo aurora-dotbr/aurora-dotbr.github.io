@@ -204,9 +204,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
   .tech-grid{grid-template-columns:1fr;gap:.85rem}
   .portfolio-grid{grid-template-columns:1fr;gap:1rem}
   /* Home theater full-width: no mobile muda pra 4/3 pra mostrar mais */
-  .portfolio-grid .port-item[style*="grid-column"]{aspect-ratio:4/3!important}
+  .portfolio-grid .port-fullwidth{aspect-ratio:4/3!important;grid-column:auto!important}
   /* Clínica vertical: limita altura máxima no mobile */
-  .portfolio-grid .port-item[style*="9/16"]{max-height:520px;margin:0 auto}
+  .portfolio-grid .port-vertical{max-height:520px;margin:0 auto}
   /* Vídeos */
   .portfolio-grid .port-video{aspect-ratio:unset;max-height:240px;overflow:hidden}
   .portfolio-grid .port-video iframe{width:100%;height:240px;display:block;border:none}
@@ -318,15 +318,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       <div class="tech-item full">
         <div class="tech-ico">📋</div>
         <div class="tech-txt">
-          <strong>Projeto documentado para o empreiteiro executar</strong>
-          <p>Entrego o projeto completo de infraestrutura para o empreiteiro da obra seguir. Sem depender de visita presencial para a maioria dos projetos. Funciona de qualquer cidade do Brasil.</p>
+          <strong>Projeto entregue para o empreiteiro executar</strong>
+          <p>Documentação completa para o empreiteiro seguir na obra. Atendo de qualquer cidade do Brasil.</p>
         </div>
       </div>
       <div class="tech-item" style="grid-column:1/-1;flex-direction:row;align-items:flex-start;gap:1.25rem;">
         <div class="tech-ico" style="flex-shrink:0;">⚡</div>
         <div class="tech-txt">
           <strong>Infraestrutura preparada para o futuro</strong>
-          <p>Eletrodutos vazios, fio neutro nos interruptores e tomada trifásica na garagem. Seu projeto já sai preparado. Sem precisar quebrar parede no futuro.</p>
+          <p>Fio neutro, eletrodutos vazios e tomada trifásica na garagem. Seu projeto já sai preparado para qualquer expansão.</p>
         </div>
       </div>
     </div>
@@ -362,7 +362,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       </div>
 
       <!-- Home Theater Acqua Mare -->
-      <div class="port-item" style="padding:0;grid-column:1/-1;aspect-ratio:16/9;">
+      <div class="port-item port-fullwidth" style="padding:0;grid-column:1/-1;aspect-ratio:16/9;">
         <img src="homecinema-acquamare.png" alt="Home Theater 7.1 — Condomínio Acqua Mare, Praia Grande SP" class="port-foto" loading="lazy" style="object-position:center 40%">
         <div class="port-label">🎬 Home Theater 7.1 · Acqua Mare, Praia Grande SP</div>
       </div>
@@ -386,7 +386,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:3rem
       </div>
 
       <!-- NOVO 3: Clínica Odontológica (foto) -->
-      <div class="port-item" style="padding:0;aspect-ratio:9/16;">
+      <div class="port-item port-vertical" style="padding:0;aspect-ratio:9/16;">
         <img src="clinica-oral.webp" alt="Clínica Odontológica Rehabilitá Oral Clinic — rede estruturada, câmeras e sonorização" class="port-foto" loading="lazy" style="object-position:center 30%">
         <div class="port-label">🏥 Integração de Sistemas · Clínica Odontológica · Praia Grande SP</div>
       </div>
